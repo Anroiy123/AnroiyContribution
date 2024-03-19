@@ -8,9 +8,25 @@ std::string HexToDecimal::CovertIntegerPartToDecimal(std::string integerPart)
     }
     else
     {
-        /*Code here*/
-        /*Tran Hung*/
-        return "";
+        int decimalValue = 0;
+        int base = 1;
+
+        for (int i = integerPart.size() - 1; i >= 0; i--)
+        {
+            if (integerPart[i] >= '0' && integerPart[i] <= '9')
+            {
+                decimalValue += (integerPart[i] - '0') * base;
+            }
+            else if (integerPart[i] >= 'A' && integerPart[i] <= 'F')
+            {
+                decimalValue += (integerPart[i] - 'A' + 10) * base;
+            }
+
+            base *= 16;
+        }
+
+        return std::to_string(decimalValue);
+
     }
 }
 
@@ -22,9 +38,26 @@ std::string HexToDecimal::ConvertFractionalPartToDecimal(std::string fractionalP
     }
     else
     {
-        /*Code here*/
-        /*Tran Hung*/
-        return "";
+        double decimalValue = 0;
+        double base = 16;
+
+        for (int i = 0; i < fractionalPart.size(); i++)
+        {
+            if (fractionalPart[i] >= '0' && fractionalPart[i] <= '9')
+            {
+                decimalValue += (fractionalPart[i] - '0') / base;
+            }
+            else if (fractionalPart[i] >= 'A' && fractionalPart[i] <= 'F')
+            {
+                decimalValue += (fractionalPart[i] - 'A' + 10) / base;
+            }
+
+            base *= 16;
+        }
+
+        std::string decimalValueString = std::to_string(decimalValue);
+        return decimalValueString.substr(2, precision);
+
     }
 }
 
